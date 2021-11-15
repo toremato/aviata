@@ -1,0 +1,126 @@
+@use "sass:string";
+
+@import "./variables.scss";
+
+// Spacing
+
+@mixin generate($prefix, $property) {
+    $sizes: 1, 2, 3, 4, 5, auto;
+    $spacing: 4px;
+
+    @each $i in $sizes {
+      @if string.unquote(#{$i}) == auto {
+        .#{$prefix}-#{$i} {
+          #{$property}: auto;
+        }
+      } @else {
+        .#{$prefix}-#{$i} {
+          #{$property}: $spacing * $i;
+        }
+      }
+    }
+}
+
+@include generate(mt, margin-top);
+@include generate(mr, margin-right);
+@include generate(mb, margin-bottom);
+@include generate(ml, margin-left);
+
+@include generate(pt, padding-top);
+@include generate(pr, padding-right);
+@include generate(pb, padding-bottom);
+@include generate(pl, padding-left);
+
+
+// Typography
+
+.text-xxs {
+  font-size: .625rem;
+}
+.text-xs {
+  font-size: .75rem;
+}
+.text-s {
+  font-size: .875rem;
+}
+.text-m {
+  font-size: 1rem;
+}
+.text-l {
+  font-size: 1.125rem;
+}
+.text-xl {
+  font-size: 1.5rem;
+}
+
+.line-xxs {
+  line-height: .625rem;
+}
+.line-xs {
+  line-height: .75rem;
+}
+.line-s {
+  line-height: .875rem;
+}
+.line-m {
+  line-height: 1rem;
+}
+.line-l {
+  line-height: 1.125rem;
+}
+.line-xl {
+  line-height: 1.5rem;
+}
+
+.weight-400 {
+  font-weight: 400;
+}
+.weight-500 {
+  font-weight: 500;
+}
+.weight-600 {
+  font-weight: 600;
+}
+.weight-700 {
+  font-weight: 700;
+}
+
+.text-center {
+  text-align: center;
+}
+
+
+.gray-1 {
+  color: $gray-1;
+}
+.gray-2 {
+  color: $gray-2;
+}
+.gray-3 {
+  color: $gray-3;
+}
+.warning {
+  color: $warning;
+}
+
+
+// Layout
+
+.d-flex {
+  display: flex;
+}
+.flex-column {
+  flex-direction: column;
+}
+.flex-row {
+  flex-direction: row;
+}
+.justify-between {
+  justify-content: space-between;
+}
+.align-center {
+  align-items: center ;
+}
+.flex-grow {
+  flex-grow: 1;
+}
