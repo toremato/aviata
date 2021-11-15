@@ -2,6 +2,7 @@ import Vue from "vue";
 import Vuex from "vuex";
 
 Vue.use(Vuex);
+let baseUrl = process.env.NODE_ENV === "production" ? "/aviata/" : "/";
 
 export default new Vuex.Store({
   state: {
@@ -19,7 +20,7 @@ export default new Vuex.Store({
   },
   actions: {
     getAirlines({ commit }) {
-      fetch("/results.json")
+      fetch(`${baseUrl}results.json`)
         .then((response) => response.json())
         .then((json) => {
           commit("setAirlines", json.airlines);
@@ -28,7 +29,7 @@ export default new Vuex.Store({
 
     async getFlights({ commit }) {
       return new Promise((resolve, reject) => {
-        fetch("/results.json")
+        fetch(`${baseUrl}results.json`)
           .then((response) => response.json())
           .then((json) => {
             commit("setFlights", json.flights);
