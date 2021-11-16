@@ -10,6 +10,7 @@
       <strong class="text-s ml-3 flight-carrier-name">
         {{ route.carrierName }}
       </strong>
+      <div class="luggage-phone ml-auto text-xs">{{ luggageString }}</div>
     </div>
 
     <div class="d-flex flex-column flight-departure">
@@ -78,6 +79,7 @@ import moment from "moment";
 export default {
   props: {
     route: Object,
+    luggageString: String,
   },
   data() {
     return {};
@@ -129,7 +131,7 @@ export default {
     grid-template-rows: auto auto;
     gap: 1.75rem;
     grid-template-areas:
-      "flight-carrier flight-carrier ."
+      "flight-carrier flight-carrier flight-carrier"
       "flight-departure flight-segments flight-arrival";
     // "flight-segments flight-segments flight-segments";
   }
@@ -138,7 +140,7 @@ export default {
     // grid-template-columns: auto 1fr auto;
     grid-template-rows: auto auto auto;
     grid-template-areas:
-      "flight-carrier . ."
+      "flight-carrier flight-carrier flight-carrier"
       "flight-departure . flight-arrival"
       "flight-segments flight-segments flight-segments";
     // gap: 1.75rem;
@@ -149,6 +151,12 @@ export default {
   grid-area: flight-carrier;
   display: flex;
   align-items: center;
+
+  .luggage-phone {
+    @media (min-width: 600px) {
+      display: none;
+    }
+  }
 }
 .flight-departure {
   grid-area: flight-departure;
@@ -157,6 +165,11 @@ export default {
   grid-area: flight-segments;
   align-self: start;
   padding-top: 0.1rem;
+  justify-content: space-between;
+
+  @media (max-width: 400px) {
+    height: 5rem;
+  }
 }
 .flight-arrival {
   grid-area: flight-arrival;

@@ -2,7 +2,11 @@
   <div class="flight-card">
     <div class="flight-card-route">
       <div class="d-flex align-center temp">
-        <FlightRoute :route="formattedData" class="flight-route-stepper" />
+        <FlightRoute
+          :route="formattedData"
+          class="flight-route-stepper"
+          :luggageString="luggageString"
+        />
       </div>
       <div class="d-flex flight-conditions">
         <a class="button-link mr-5">Детали перелета</a>
@@ -45,9 +49,14 @@
       <span class="text-xs gray-2 mt-2 text-center">
         Цена за всех пассажиров
       </span>
-      <span class="text-xxs">
-        {{ luggageString(Object.values(details.services)[0]) }}
-      </span>
+      <div class="d-flex align-center mt-3 luggage-info">
+        <span class="text-xxs flex-grow text-center">
+          {{ luggageString }}
+        </span>
+        <Button class="button-secondary ml-2" @click="test(details.price)">
+          + Добавить багаж
+        </Button>
+      </div>
     </div>
   </div>
 </template>
@@ -100,6 +109,16 @@ export default {
 
       return result;
     },
+
+    luggageString() {
+      console.log("???", Object.keys(this.details.services));
+      if (Object.keys(this.details.services).includes("0PC")) {
+        return "Нет багажа";
+      } else if (Object.keys(this.details.services).includes("1PC")) {
+        return "1 ед. багажа";
+      }
+      return Object.values(this.details.services)[0].alt_text;
+    },
   },
   methods: {
     test(t) {
@@ -133,11 +152,6 @@ export default {
 
       return result;
     },
-
-    luggageString(test) {
-      // console.log("???", test);
-      return test.alt_text;
-    },
   },
 };
 </script>
@@ -150,7 +164,7 @@ export default {
   overflow: hidden;
   display: flex;
 
-  @media (max-width: 800px) {
+  @media (max-width: 600px) {
     flex-direction: column;
   }
 
@@ -180,7 +194,10 @@ export default {
       @media (max-width: 1024px) {
         font-size: 0.625rem;
       }
-      @media (max-width: 800px) {
+      @media (max-width: 840px) {
+        margin-top: 2rem;
+      }
+      @media (max-width: 600px) {
         display: none;
       }
     }
@@ -189,9 +206,13 @@ export default {
   .flight-card-info {
     background-color: #f5f5f5;
     display: flex;
+    align-items: center;
     flex-direction: column;
     padding: 0.75rem 1.25rem 1rem;
-
+    @media (min-width: 800px) {
+      align-items: stretch;
+      width: 25%;
+    }
     strong {
       font-size: 1.125rem;
       font-weight: 500;
@@ -215,6 +236,19 @@ export default {
         //     margin-left: auto;
         //     margin-right: auto;
       }
+    }
+
+    .luggage-info {
+      // align-self: stretch;
+      @media (max-width: 600px) {
+        display: none;
+      }
+    }
+
+    .button-secondary {
+      font-size: 0.75rem;
+      font-weight: 500;
+      padding: 0.25rem 0.5rem;
     }
   }
 

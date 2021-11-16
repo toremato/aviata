@@ -77,7 +77,7 @@ export default {
     min-width: 10rem;
   }
 
-  @media (max-width: 800px) {
+  @media (max-width: 840px) {
     flex-direction: column;
 
     #filters {
@@ -91,7 +91,7 @@ export default {
     width: 100%;
     margin-left: 20px;
 
-    @media (max-width: 800px) {
+    @media (max-width: 840px) {
       margin-top: 1.5rem;
       margin-left: 0;
     }

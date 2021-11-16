@@ -43,6 +43,15 @@ body {
     }
   }
 
+  &-secondary {
+    background-color: $light-blue;
+    color: $blue;
+  }
+
+}
+
+.select-none {
+  user-select: none;
 }
 
 
@@ -52,6 +61,7 @@ a.button-link, a.button-link:visited {
   text-decoration: none;
   cursor: pointer;
   border-bottom: 1px dashed #7284e4;
+  user-select: none;
 }
 a.button-link:hover {
   border-bottom: none;
